@@ -4,6 +4,7 @@ using System.IO;
 using System.Xml.Linq;
 using CourseGradeB;
 using K12.Data;
+using K12.BusinessLogic;
 
 namespace NESHStudentReport
 {
@@ -185,7 +186,7 @@ namespace NESHStudentReport
             {
                 int intSchoolYear = int.Parse(SchoolYear) + 1911;
 
-                return (intSchoolYear - 1) + "~" + intSchoolYear;
+                return intSchoolYear + "~" + (intSchoolYear + 1);
             }
             catch
             {
@@ -207,8 +208,10 @@ namespace NESHStudentReport
             SeatNo = row.Field<string>("seat_no");
             ClassName = row.Field<string>("class_name");
         }
-        public void FillDiscipline(DisciplineRecord vRecord)
+        public void FillDiscipline(AutoSummaryRecord vRecord)
         {
+            //if (vRecord.Cleared == "是")
+            //    return;
             if (vRecord.Semester.Equals(1))
             {
                 this.FirstMeritA += K12.Data.Int.GetValue(vRecord.MeritA);
@@ -249,44 +252,80 @@ namespace NESHStudentReport
             }
         }
 
-        public void FillAttendance(AttendanceRecord vRecord)
+        public void FillAttendance(AutoSummaryRecord vRecord)
         {
             if (vRecord.Semester.Equals(1))
             {
-                foreach (AttendancePeriod Period in vRecord.PeriodDetail)
+                foreach (AbsenceCountRecord acr in vRecord.AbsenceCounts)
                 {
-                    if (Period.AbsenceType.Equals("事假") || Period.AbsenceType.Equals("病假"))
-                        FirstPerodsAbsentExcused++;
-                    else if (Period.AbsenceType.Equals("曠課"))
-                        FirstPerodsAbsentUnexcused++;
-                    else if (Period.AbsenceType.Equals("遲到"))
-                        FirstTimesTardy++;
-                    else if (Period.AbsenceType.Equals("早休遲到") || Period.AbsenceType.Equals("午休遲到"))
-                        FirstQuietTimeTardy++;
-                    else if (Period.AbsenceType.Equals("早休曠課") || Period.AbsenceType.Equals("午休曠課"))
-                        FirstQuietTimeUnexcused++;
-                    else if (Period.AbsenceType.Equals("升旗"))
-                        FirstFlagCeremonyUnexcused++;
+                    if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
+                        FirstPerodsAbsentExcused += acr.Count;
+                    else if (acr.Name.Equals("曠課"))
+                        FirstPerodsAbsentUnexcused += acr.Count;
+                    else if (acr.Name.Equals("遲到"))
+                        FirstTimesTardy += acr.Count;
+                    else if (acr.Name.Equals("早休遲到") || acr.Name.Equals("午休遲到"))
+                        FirstQuietTimeTardy += acr.Count;
+                    else if (acr.Name.Equals("早休曠課") || acr.Name.Equals("午休曠課"))
+                        FirstQuietTimeUnexcused += acr.Count;
+                    else if (acr.Name.Equals("升旗"))
+                        FirstFlagCeremonyUnexcused += acr.Count;
                 }
             }
             else if (vRecord.Semester.Equals(2))
             {
-                foreach (AttendancePeriod Period in vRecord.PeriodDetail)
+                foreach (AbsenceCountRecord acr in vRecord.AbsenceCounts)
                 {
-                    if (Period.AbsenceType.Equals("事假") || Period.AbsenceType.Equals("病假"))
-                        SecondPerodsAbsentExcused++;
-                    else if (Period.AbsenceType.Equals("曠課"))
-                        SecondPerodsAbsentUnexcused++;
-                    else if (Period.AbsenceType.Equals("遲到"))
-                        SecondTimesTardy++;
-                    else if (Period.AbsenceType.Equals("早休遲到") || Period.AbsenceType.Equals("午休遲到"))
-                        SecondQuietTimeTardy++;
-                    else if (Period.AbsenceType.Equals("早休曠課") || Period.AbsenceType.Equals("午休曠課"))
-                        SecondQuietTimeUnexcused++;
-                    else if (Period.AbsenceType.Equals("升旗"))
-                        SecondFlagCeremonyUnexcused++;
+                    if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
+                        SecondPerodsAbsentExcused += acr.Count;
+                    else if (acr.Name.Equals("曠課"))
+                        SecondPerodsAbsentUnexcused += acr.Count;
+                    else if (acr.Name.Equals("遲到"))
+                        SecondTimesTardy += acr.Count;
+                    else if (acr.Name.Equals("早休遲到") || acr.Name.Equals("午休遲到"))
+                        SecondQuietTimeTardy += acr.Count;
+                    else if (acr.Name.Equals("早休曠課") || acr.Name.Equals("午休曠課"))
+                        SecondQuietTimeUnexcused += acr.Count;
+                    else if (acr.Name.Equals("升旗"))
+                        SecondFlagCeremonyUnexcused += acr.Count;
                 }
             }
+            //if (vRecord.Semester.Equals(1))
+            //{
+            //    foreach (AttendancePeriod Period in vRecord.PeriodDetail)
+            //    {
+            //        if (Period.AbsenceType.Equals("事假") || Period.AbsenceType.Equals("病假"))
+            //            FirstPerodsAbsentExcused++;
+            //        else if (Period.AbsenceType.Equals("曠課"))
+            //            FirstPerodsAbsentUnexcused++;
+            //        else if (Period.AbsenceType.Equals("遲到"))
+            //            FirstTimesTardy++;
+            //        else if (Period.AbsenceType.Equals("早休遲到") || Period.AbsenceType.Equals("午休遲到"))
+            //            FirstQuietTimeTardy++;
+            //        else if (Period.AbsenceType.Equals("早休曠課") || Period.AbsenceType.Equals("午休曠課"))
+            //            FirstQuietTimeUnexcused++;
+            //        else if (Period.AbsenceType.Equals("升旗"))
+            //            FirstFlagCeremonyUnexcused++;
+            //    }
+            //}
+            //else if (vRecord.Semester.Equals(2))
+            //{
+            //    foreach (AttendancePeriod Period in vRecord.PeriodDetail)
+            //    {
+            //        if (Period.AbsenceType.Equals("事假") || Period.AbsenceType.Equals("病假"))
+            //            SecondPerodsAbsentExcused++;
+            //        else if (Period.AbsenceType.Equals("曠課"))
+            //            SecondPerodsAbsentUnexcused++;
+            //        else if (Period.AbsenceType.Equals("遲到"))
+            //            SecondTimesTardy++;
+            //        else if (Period.AbsenceType.Equals("早休遲到") || Period.AbsenceType.Equals("午休遲到"))
+            //            SecondQuietTimeTardy++;
+            //        else if (Period.AbsenceType.Equals("早休曠課") || Period.AbsenceType.Equals("午休曠課"))
+            //            SecondQuietTimeUnexcused++;
+            //        else if (Period.AbsenceType.Equals("升旗"))
+            //            SecondFlagCeremonyUnexcused++;
+            //    }
+            //}
         }
 
         private string GetScore(string Score,bool IsConvertScore)

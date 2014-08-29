@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows.Forms;
 using FISCA.Data;
 using K12.Data;
+using K12.BusinessLogic;
 
 namespace NESHStudentReport
 {
@@ -18,7 +19,7 @@ namespace NESHStudentReport
             {
                 string strStudentSQL = "select name,english_name,seat_no,class_name,student.id from student left outer join class on class.id=student.ref_class_id where student.id in (" + string.Join(",", StudentIDs.ToArray()) + ")";
 
-                string strScoreSQL = "select ref_student_id,score_info,school_year,semester from sems_subj_score where ref_student_id in (" + string.Join(",", StudentIDs.ToArray()) + ")";
+                string strScoreSQL = "select ref_student_id,score_info,school_year,semester from sems_subj_score where school_year=" + SchoolYear + " and ref_student_id in (" + string.Join(",", StudentIDs.ToArray()) + ")";
 
                 QueryHelper QueryHelper = Utility.QueryHelper;
 
@@ -51,33 +52,49 @@ namespace NESHStudentReport
                 }
                 #endregion
 
+                //Get AutoSummaryRecord
+                List<AutoSummaryRecord> AutoSummaryRecords = AutoSummary.Select(StudentIDs, null);
+                AutoSummaryRecords = AutoSummaryRecords.FindAll(x => ("" + x.SchoolYear).Equals(SchoolYear));
+
                 #region 取得獎懲資料
-
-                List<DisciplineRecord> DisciplineRecords = Discipline.SelectByStudentIDs(StudentIDs);
-
-                DisciplineRecords = DisciplineRecords.FindAll(x => ("" + x.SchoolYear).Equals(SchoolYear));
-
-                foreach (DisciplineRecord DisciplineRecord in DisciplineRecords)
+                foreach (AutoSummaryRecord record in AutoSummaryRecords)
                 {
-                    string StudentID = DisciplineRecord.RefStudentID;
+                    string StudentID = record.RefStudentID;
 
-                    Students[StudentID].FillDiscipline(DisciplineRecord);
+                    Students[StudentID].FillDiscipline(record);
                 }
+
+                //List<DisciplineRecord> DisciplineRecords = Discipline.SelectByStudentIDs(StudentIDs);
+
+                //DisciplineRecords = DisciplineRecords.FindAll(x => ("" + x.SchoolYear).Equals(SchoolYear));
+
+                //foreach (DisciplineRecord DisciplineRecord in DisciplineRecords)
+                //{
+                //    string StudentID = DisciplineRecord.RefStudentID;
+
+                //    Students[StudentID].FillDiscipline(DisciplineRecord);
+                //}
                 #endregion
 
                 #region 取得缺曠資料
-                List<int> SchoolYears = new List<int>();
-
-                SchoolYears.Add(int.Parse(SchoolYear));
-
-                List<AttendanceRecord> AttendanceRecords = Attendance.Select(StudentIDs, null, null, null,SchoolYears,null);
-
-                foreach(AttendanceRecord AttendanceRecord in AttendanceRecords)
+                foreach (AutoSummaryRecord record in AutoSummaryRecords)
                 {
-                    string StudentID = AttendanceRecord.RefStudentID;
+                    string StudentID = record.RefStudentID;
 
-                    Students[StudentID].FillAttendance(AttendanceRecord);
+                    Students[StudentID].FillAttendance(record);
                 }
+                //List<int> SchoolYears = new List<int>();
+
+                //SchoolYears.Add(int.Parse(SchoolYear));
+
+                //List<AttendanceRecord> AttendanceRecords = Attendance.Select(StudentIDs, null, null, null,SchoolYears,null);
+
+                //foreach(AttendanceRecord AttendanceRecord in AttendanceRecords)
+                //{
+                //    string StudentID = AttendanceRecord.RefStudentID;
+
+                //    Students[StudentID].FillAttendance(AttendanceRecord);
+                //}
                 #endregion
 
                 #region 取得學期曆程

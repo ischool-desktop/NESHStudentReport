@@ -52,12 +52,12 @@ namespace NESHStudentReport
             }
         }
 
-        private void MailMerge_MergeField(object sender, Aspose.Words.Reporting.MergeFieldEventArgs e)
-        {
-            #region 科目成績
+        //private void MailMerge_MergeField(object sender, Aspose.Words.Reporting.MergeFieldEventArgs e)
+        //{
+        //    #region 科目成績
 
-            #endregion
-        }
+        //    #endregion
+        //}
 
         private void btnRun_Click(object sender, EventArgs e)
         {
@@ -91,9 +91,12 @@ namespace NESHStudentReport
 
                     foreach (Student vStudent in Students)
                     {
-                        Document dataDoc = new Document(template, "", LoadFormat.Doc, "");
-                        dataDoc.MailMerge.MergeField += new Aspose.Words.Reporting.MergeFieldEventHandler(MailMerge_MergeField);
-                        dataDoc.MailMerge.RemoveEmptyParagraphs = true;
+                        template.Seek(0, SeekOrigin.Begin);
+                        //Document dataDoc = new Document(template, "", LoadFormat.Doc, "");
+                        //dataDoc.MailMerge.MergeField += new Aspose.Words.Reporting.MergeFieldEventHandler(MailMerge_MergeField);
+                        //dataDoc.MailMerge.RemoveEmptyParagraphs = true;
+                        //Document dataDoc = new Document(new MemoryStream(template));
+                        Document dataDoc = new Document(template);
 
                         mergeKeyValue = vStudent.OutputValue();
 

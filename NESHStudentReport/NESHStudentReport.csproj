@@ -31,15 +31,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Aspose.Cells">
-      <HintPath>..\..\ischool(NEHS)\modules\Campus\Aspose.Cells.dll</HintPath>
+    <Reference Include="Aspose.Cells_201402">
+      <HintPath>Library\Aspose.Cells_201402.dll</HintPath>
+      <Private>False</Private>
     </Reference>
-    <Reference Include="Aspose.Words">
-      <HintPath>..\..\ischool(NEHS)\modules\Campus\Aspose.Words.dll</HintPath>
+    <Reference Include="Aspose.Words_201402">
+      <HintPath>Library\Aspose.Words_201402.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="CourseGradeB">
-      <HintPath>..\..\ischool(NEHS)\modules\CourseGradeB\CourseGradeB.dll</HintPath>
+      <HintPath>Library\CourseGradeB.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="DevComponents.DotNetBar2, Version=9.5.0.1, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
@@ -47,54 +48,61 @@
       <HintPath>..\..\ischool(NEHS)\components\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
     <Reference Include="FISCA">
-      <HintPath>..\..\ischool(NEHS)\kernel\FISCA.dll</HintPath>
+      <HintPath>Library\FISCA.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.Core">
-      <HintPath>..\..\ischool(NEHS)\kernel\FISCA.Core.dll</HintPath>
+      <HintPath>Library\FISCA.Core.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.Data">
-      <HintPath>..\..\ischool(NEHS)\kernel\FISCA.Data.dll</HintPath>
+      <HintPath>Library\FISCA.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.Permission">
-      <HintPath>..\..\ischool(NEHS)\kernel\FISCA.Permission.dll</HintPath>
+      <HintPath>Library\FISCA.Permission.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.Presentation">
-      <HintPath>..\..\ischool(NEHS)\kernel\FISCA.Presentation.dll</HintPath>
+      <HintPath>Library\FISCA.Presentation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="FISCA.UDT">
-      <HintPath>..\..\ischool(NEHS)\kernel\FISCA.UDT.dll</HintPath>
+      <HintPath>Library\FISCA.UDT.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Framework">
-      <HintPath>..\..\ischool(NEHS)\modules\JHCore\Framework.dll</HintPath>
+      <HintPath>Library\Framework.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="IntelliSchool.DSA.ClientFramework">
-      <HintPath>..\..\ischool(NEHS)\modules\JHCore\IntelliSchool.DSA.ClientFramework.dll</HintPath>
+      <HintPath>Library\IntelliSchool.DSA.ClientFramework.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="JHSchool.Data">
       <HintPath>..\..\ischool(NEHS)\modules\JHCore\JHSchool.Data.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="K12.BusinessLogic">
+      <HintPath>Library\K12.BusinessLogic.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="K12.Data">
-      <HintPath>..\..\ischool(NEHS)\modules\JHCore\K12.Data.dll</HintPath>
+      <HintPath>Library\K12.Data.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="K12.Presentation">
-      <HintPath>..\..\ischool(NEHS)\modules\JHCore\K12.Presentation.dll</HintPath>
+      <HintPath>Library\K12.Presentation.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="SmartSchool.API.PlugIn">
-      <HintPath>..\..\ischool(NEHS)\modules\JHCore\SmartSchool.API.PlugIn.dll</HintPath>
+      <HintPath>Library\SmartSchool.API.PlugIn.dll</HintPath>
       <Private>False</Private>
     </Reference>
-    <Reference Include="SmartSchool.Customization.PlugIn">
-      <HintPath>..\..\ischool(NEHS)\modules\JHCore\SmartSchool.Customization.PlugIn.dll</HintPath>
+    <Reference Include="SmartSchool.Customization.PlugIn, Version=1.1.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Library\SmartSchool.Customization.PlugIn.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
