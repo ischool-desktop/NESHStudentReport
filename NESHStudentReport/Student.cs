@@ -230,19 +230,19 @@ namespace NESHStudentReport
 
                 this.SecondDemeritA += K12.Data.Int.GetValue(vRecord.DemeritA);
                 this.SecondDemeritB += K12.Data.Int.GetValue(vRecord.DemeritB);
-                this.SecondDemeritC += K12.Data.Int.GetValue(vRecord.DemeritC); 
+                this.SecondDemeritC += K12.Data.Int.GetValue(vRecord.DemeritC);
             }
         }
 
         public void FillSemesterHistory(SemesterHistoryRecord vRecord)
         {
-            foreach(SemesterHistoryItem Item in vRecord.SemesterHistoryItems)
+            foreach (SemesterHistoryItem Item in vRecord.SemesterHistoryItems)
             {
                 if (("" + Item.SchoolYear).Equals(SchoolYear))
                 {
                     if (Item.Semester.Equals(1))
                     {
-                        FirstSchoolDayCount = Item.SchoolDayCount.HasValue? Item.SchoolDayCount.Value : 0 ;
+                        FirstSchoolDayCount = Item.SchoolDayCount.HasValue ? Item.SchoolDayCount.Value : 0;
                     }
                     else if (Item.Semester.Equals(2))
                     {
@@ -258,36 +258,61 @@ namespace NESHStudentReport
             {
                 foreach (AbsenceCountRecord acr in vRecord.AbsenceCounts)
                 {
-                    if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
+                    if (DataAccess.AbsenceSetDic["事病假"].Contains(acr.Name))
                         FirstPerodsAbsentExcused += acr.Count;
-                    else if (acr.Name.Equals("曠課"))
+                    if (DataAccess.AbsenceSetDic["曠課"].Contains(acr.Name))
                         FirstPerodsAbsentUnexcused += acr.Count;
-                    else if (acr.Name.Equals("遲到"))
+                    if (DataAccess.AbsenceSetDic["遲到"].Contains(acr.Name))
                         FirstTimesTardy += acr.Count;
-                    else if (acr.Name.Equals("早休遲到") || acr.Name.Equals("午休遲到"))
-                        FirstQuietTimeTardy += acr.Count;
-                    else if (acr.Name.Equals("早休曠課") || acr.Name.Equals("午休曠課"))
-                        FirstQuietTimeUnexcused += acr.Count;
-                    else if (acr.Name.Equals("升旗"))
+                    if (DataAccess.AbsenceSetDic["升旗"].Contains(acr.Name))
                         FirstFlagCeremonyUnexcused += acr.Count;
+                    if (DataAccess.AbsenceSetDic["早午休遲到"].Contains(acr.Name))
+                        FirstQuietTimeTardy += acr.Count;
+                    if (DataAccess.AbsenceSetDic["早午休曠課"].Contains(acr.Name))
+                        FirstQuietTimeUnexcused += acr.Count;
+                    //if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
+                    //    FirstPerodsAbsentExcused += acr.Count;
+                    //else if (acr.Name.Equals("曠課"))
+                    //    FirstPerodsAbsentUnexcused += acr.Count;
+                    //else if (acr.Name.Equals("遲到"))
+                    //    FirstTimesTardy += acr.Count;
+                    //else if (acr.Name.Equals("早休遲到") || acr.Name.Equals("午休遲到"))
+                    //    FirstQuietTimeTardy += acr.Count;
+                    //else if (acr.Name.Equals("早休曠課") || acr.Name.Equals("午休曠課"))
+                    //    FirstQuietTimeUnexcused += acr.Count;
+                    //else if (acr.Name.Equals("升旗"))
+                    //    FirstFlagCeremonyUnexcused += acr.Count;
                 }
             }
             else if (vRecord.Semester.Equals(2))
             {
                 foreach (AbsenceCountRecord acr in vRecord.AbsenceCounts)
                 {
-                    if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
+                    if (DataAccess.AbsenceSetDic["事病假"].Contains(acr.Name))
                         SecondPerodsAbsentExcused += acr.Count;
-                    else if (acr.Name.Equals("曠課"))
+                    if (DataAccess.AbsenceSetDic["曠課"].Contains(acr.Name))
                         SecondPerodsAbsentUnexcused += acr.Count;
-                    else if (acr.Name.Equals("遲到"))
+                    if (DataAccess.AbsenceSetDic["遲到"].Contains(acr.Name))
                         SecondTimesTardy += acr.Count;
-                    else if (acr.Name.Equals("早休遲到") || acr.Name.Equals("午休遲到"))
-                        SecondQuietTimeTardy += acr.Count;
-                    else if (acr.Name.Equals("早休曠課") || acr.Name.Equals("午休曠課"))
-                        SecondQuietTimeUnexcused += acr.Count;
-                    else if (acr.Name.Equals("升旗"))
+                    if (DataAccess.AbsenceSetDic["升旗"].Contains(acr.Name))
                         SecondFlagCeremonyUnexcused += acr.Count;
+                    if (DataAccess.AbsenceSetDic["早午休遲到"].Contains(acr.Name))
+                        SecondQuietTimeTardy += acr.Count;
+                    if (DataAccess.AbsenceSetDic["早午休曠課"].Contains(acr.Name))
+                        SecondQuietTimeUnexcused += acr.Count;
+
+                    //if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
+                    //    SecondPerodsAbsentExcused += acr.Count;
+                    //else if (acr.Name.Equals("曠課"))
+                    //    SecondPerodsAbsentUnexcused += acr.Count;
+                    //else if (acr.Name.Equals("遲到"))
+                    //    SecondTimesTardy += acr.Count;
+                    //else if (acr.Name.Equals("早休遲到") || acr.Name.Equals("午休遲到"))
+                    //    SecondQuietTimeTardy += acr.Count;
+                    //else if (acr.Name.Equals("早休曠課") || acr.Name.Equals("午休曠課"))
+                    //    SecondQuietTimeUnexcused += acr.Count;
+                    //else if (acr.Name.Equals("升旗"))
+                    //    SecondFlagCeremonyUnexcused += acr.Count;
                 }
             }
             //if (vRecord.Semester.Equals(1))
@@ -328,7 +353,7 @@ namespace NESHStudentReport
             //}
         }
 
-        private string GetScore(string Score,bool IsConvertScore)
+        private string GetScore(string Score, bool IsConvertScore)
         {
             if (!IsConvertScore)
                 return Score;
@@ -341,7 +366,7 @@ namespace NESHStudentReport
                 return Score;
         }
 
-        public void FillScore(DataRow row,bool IsConvertScore)
+        public void FillScore(DataRow row, bool IsConvertScore)
         {
             //<SemesterSubjectScoreInfo>
             //    <Subject GPA=""0"" Level=""4"" 努力程度="""" 成績=""50"" 文字描述="""" 權數=""3"" 科目=""奇怪的科目"" 節數=""3"" 註記="""" 領域=""TEST""/>
@@ -362,7 +387,7 @@ namespace NESHStudentReport
                 this.FirstAvgGPA = AvgGPA;
             }
             else if (Semester.Equals("2"))
-            { 
+            {
                 this.SecondAvgScore = GetScore(AvgScore, IsConvertScore);
                 this.SecondAvgGPA = AvgGPA;
             }
@@ -376,7 +401,7 @@ namespace NESHStudentReport
                 string Period = elmSubject.AttributeText("節數");
                 string Grade = Score;
 
-                Grade = GetScore(Score,IsConvertScore);
+                Grade = GetScore(Score, IsConvertScore);
 
                 Subject vSubject = Subjects.Find(x => x.Name.Equals(Subject));
 
@@ -385,7 +410,7 @@ namespace NESHStudentReport
                     vSubject = new Subject();
                     vSubject.Name = Subject;
                     vSubject.Hour = Period;
-                    Subjects.Add(vSubject); 
+                    Subjects.Add(vSubject);
                 }
 
                 if (Semester.Equals("1"))
@@ -410,8 +435,8 @@ namespace NESHStudentReport
             result.Add("上學期GPA", FirstAvgGPA);
             result.Add("下學期GPA", SecondAvgGPA);
 
-            result.Add("上課天數上",FirstSchoolDayCount);
-            result.Add("上課天數下",SecondSchoolDayCount);
+            result.Add("上課天數上", FirstSchoolDayCount);
+            result.Add("上課天數下", SecondSchoolDayCount);
 
             result.Add("大功上", FirstMeritA);
             result.Add("小功上", FirstMeritB);
@@ -427,7 +452,7 @@ namespace NESHStudentReport
             result.Add("小過下", SecondDemeritB);
             result.Add("警告下", SecondDemeritC);
 
-            result.Add("事病假節數上", FirstPerodsAbsentExcused );
+            result.Add("事病假節數上", FirstPerodsAbsentExcused);
             result.Add("曠課節數上", FirstPerodsAbsentUnexcused);
             result.Add("遲到次數上", FirstTimesTardy);
             result.Add("早午休遲到上", FirstQuietTimeTardy);
@@ -443,13 +468,13 @@ namespace NESHStudentReport
 
             for (int i = 0; i < Subjects.Count; i++)
             {
-                result.Add("科目"+(i+1), Subjects[i].Name);
+                result.Add("科目" + (i + 1), Subjects[i].Name);
                 result.Add("科目" + (i + 1) + "時數", Subjects[i].Hour);
                 result.Add("科目" + (i + 1) + "上學期", Subjects[i].FristGrade);
                 result.Add("科目" + (i + 1) + "下學期", Subjects[i].SecondGrade);
             }
 
-            for (int i = Subjects.Count ; i < 20; i++)
+            for (int i = Subjects.Count; i < 20; i++)
             {
                 result.Add("科目" + (i + 1), string.Empty);
                 result.Add("科目" + (i + 1) + "時數", string.Empty);

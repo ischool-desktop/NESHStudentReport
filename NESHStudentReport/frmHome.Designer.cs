@@ -32,6 +32,7 @@
             this.labelX1 = new DevComponents.DotNetBar.LabelX();
             this.btnPrint = new DevComponents.DotNetBar.ButtonX();
             this.btnExit = new DevComponents.DotNetBar.ButtonX();
+            this.link = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
             // cmbSchoolYear
@@ -40,7 +41,7 @@
             this.cmbSchoolYear.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.cmbSchoolYear.FormattingEnabled = true;
             this.cmbSchoolYear.ItemHeight = 19;
-            this.cmbSchoolYear.Location = new System.Drawing.Point(102, 21);
+            this.cmbSchoolYear.Location = new System.Drawing.Point(89, 21);
             this.cmbSchoolYear.Name = "cmbSchoolYear";
             this.cmbSchoolYear.Size = new System.Drawing.Size(164, 25);
             this.cmbSchoolYear.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -56,7 +57,7 @@
             this.labelX1.BackgroundStyle.Class = "";
             this.labelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.labelX1.Font = new System.Drawing.Font("微軟正黑體", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.labelX1.Location = new System.Drawing.Point(36, 25);
+            this.labelX1.Location = new System.Drawing.Point(23, 25);
             this.labelX1.Name = "labelX1";
             this.labelX1.Size = new System.Drawing.Size(60, 21);
             this.labelX1.TabIndex = 2;
@@ -69,7 +70,7 @@
             this.btnPrint.AutoExpandOnClick = true;
             this.btnPrint.BackColor = System.Drawing.Color.Transparent;
             this.btnPrint.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnPrint.Location = new System.Drawing.Point(102, 67);
+            this.btnPrint.Location = new System.Drawing.Point(89, 52);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(72, 28);
             this.btnPrint.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -82,7 +83,7 @@
             this.btnExit.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton;
             this.btnExit.BackColor = System.Drawing.Color.Transparent;
             this.btnExit.ColorTable = DevComponents.DotNetBar.eButtonColor.OrangeWithBackground;
-            this.btnExit.Location = new System.Drawing.Point(194, 67);
+            this.btnExit.Location = new System.Drawing.Point(181, 52);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(72, 28);
             this.btnExit.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -90,15 +91,29 @@
             this.btnExit.Text = "離  開";
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // link
+            // 
+            this.link.AutoSize = true;
+            this.link.BackColor = System.Drawing.Color.Transparent;
+            this.link.Location = new System.Drawing.Point(14, 63);
+            this.link.Name = "link";
+            this.link.Size = new System.Drawing.Size(60, 17);
+            this.link.TabIndex = 87;
+            this.link.TabStop = true;
+            this.link.Text = "假別設定";
+            this.link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_LinkClicked);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 113);
+            this.ClientSize = new System.Drawing.Size(279, 101);
+            this.Controls.Add(this.link);
             this.Controls.Add(this.btnPrint);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.labelX1);
             this.Controls.Add(this.cmbSchoolYear);
+            this.DoubleBuffered = true;
             this.MaximumSize = new System.Drawing.Size(295, 140);
             this.MinimumSize = new System.Drawing.Size(295, 140);
             this.Name = "frmHome";
@@ -116,5 +131,6 @@
         private DevComponents.DotNetBar.LabelX labelX1;
         private DevComponents.DotNetBar.ButtonX btnPrint;
         private DevComponents.DotNetBar.ButtonX btnExit;
+        private System.Windows.Forms.LinkLabel link;
     }
 }

@@ -61,6 +61,9 @@ namespace NESHStudentReport
 
         private void btnRun_Click(object sender, EventArgs e)
         {
+            //假別設定初始化
+            DataAccess.AbsenceSetDicInit();
+            
             string SelectedSchoolYear = "" + cmbSchoolYear.SelectedItem;
             List<string> SelectedStudentIDs = K12.Presentation.NLDPanels.Student.SelectedSource;
 
@@ -136,6 +139,11 @@ namespace NESHStudentReport
         private void btnExit_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            new SetForm().ShowDialog();
         }
     }
 }

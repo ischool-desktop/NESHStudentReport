@@ -6,11 +6,16 @@ using System.Windows.Forms;
 using FISCA.Data;
 using K12.Data;
 using K12.BusinessLogic;
+using FISCA.UDT;
 
 namespace NESHStudentReport
 {
     public class DataAccess
     {
+
+        private static AccessHelper _A = new AccessHelper();
+        public static Dictionary<string, List<string>> AbsenceSetDic = new Dictionary<string, List<string>>();
+
         public static List<Student> GetGrade(string SchoolYear,List<string> StudentIDs,bool IsConvertScore)
         {
             Dictionary<string, Student> Students = new Dictionary<string, Student>();
@@ -115,6 +120,28 @@ namespace NESHStudentReport
             }
 
             return Students.Values.ToList();
+        }
+
+        /// <summary>
+        /// 取得假別設定
+        /// </summary>
+        /// <returns></returns>
+        public static void AbsenceSetDicInit()
+        {
+            AbsenceSetDic.Clear();
+
+            AbsenceSetDic.Add("事病假", new List<string>());
+            AbsenceSetDic.Add("曠課", new List<string>());
+            AbsenceSetDic.Add("遲到", new List<string>());
+            AbsenceSetDic.Add("升旗", new List<string>());
+            AbsenceSetDic.Add("早午休遲到", new List<string>());
+            AbsenceSetDic.Add("早午休曠課", new List<string>());
+
+            foreach (AbsenceUDT au in _A.Select<AbsenceUDT>())
+            {
+                if (AbsenceSetDic.ContainsKey(au.Target) && !AbsenceSetDic[au.Target].Contains(au.Source))
+                    AbsenceSetDic[au.Target].Add(au.Source);
+            }
         }
     }
 }
