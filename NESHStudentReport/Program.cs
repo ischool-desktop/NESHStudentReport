@@ -25,7 +25,6 @@ namespace NESHStudentReport
             {
                 try
                 {
-
                     Exporter exporter = new ExportSemesterScore();
                     ExportStudentV2 wizard = new ExportStudentV2(exporter.Text, exporter.Image);
                     exporter.InitializeExport(wizard);

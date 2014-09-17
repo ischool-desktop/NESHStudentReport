@@ -22,7 +22,7 @@ namespace NESHStudentReport
         public override void InitializeExport(SmartSchool.API.PlugIn.Export.ExportWizard wizard)
         {
             List<string> SelectedFields = new List<string>() { "學生系統編號", "學號", "班級", "座號", "姓名" };
-            List<string> SelectableFields = new List<string>(){"領域","科目","學年度", "學期","權數","節數" , "成績" , "GPA" ,"Level"};
+            List<string> SelectableFields = new List<string>() { "領域", "科目", "學年度", "學期", "權數", "節數", "成績", "GPA", "Type", "Level" };
 
             wizard.SelectedFields.AddRange(SelectedFields);
             wizard.ExportableFields.AddRange(SelectableFields);
@@ -74,8 +74,9 @@ namespace NESHStudentReport
                             vRow.Add("節數", elmSubject.AttributeText("節數"));
                             vRow.Add("成績", elmSubject.AttributeText("成績"));
                             vRow.Add("GPA", elmSubject.AttributeText("GPA"));
+                            vRow.Add("Type", elmSubject.AttributeText("Type"));
                             vRow.Add("Level", elmSubject.AttributeText("Level"));
-                            
+
                             e.Items.Add(vRow);
                         }
                     }
