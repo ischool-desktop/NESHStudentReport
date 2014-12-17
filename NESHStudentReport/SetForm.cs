@@ -54,7 +54,7 @@ namespace NESHStudentReport
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Dictionary<string,AbsenceUDT> auDic = new Dictionary<string,AbsenceUDT>();
+            Dictionary<string, AbsenceUDT> auDic = new Dictionary<string, AbsenceUDT>();
 
             foreach (DataGridViewRow row in dgv.Rows)
             {
@@ -65,7 +65,7 @@ namespace NESHStudentReport
                 string source = row.Cells[colSource.Index].Value + "";
                 string key = target + "_" + source;
 
-                if(!auDic.ContainsKey(key))
+                if (!auDic.ContainsKey(key))
                 {
                     AbsenceUDT au = new AbsenceUDT();
                     au.Target = target;
@@ -74,12 +74,8 @@ namespace NESHStudentReport
                 }
             }
 
-            if (auDic.Count > 0)
-            {
-                _A.DeletedValues(_auList);
-
-                _A.InsertValues(auDic.Values);
-            }
+            _A.DeletedValues(_auList);
+            _A.InsertValues(auDic.Values);
 
             this.Close();
         }
