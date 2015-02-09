@@ -468,7 +468,7 @@ namespace NESHStudentReport
 
             for (int i = 0; i < Subjects.Count; i++)
             {
-                result.Add("科目" + (i + 1), Subjects[i].Name);
+                result.Add("科目" + (i + 1), DataAccess.GetSubjectChineseName(Subjects[i].Name) + Subjects[i].Name);
                 result.Add("科目" + (i + 1) + "時數", Subjects[i].Hour);
                 result.Add("科目" + (i + 1) + "上學期", Subjects[i].FristGrade);
                 result.Add("科目" + (i + 1) + "下學期", Subjects[i].SecondGrade);

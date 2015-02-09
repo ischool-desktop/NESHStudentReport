@@ -7,6 +7,7 @@ using FISCA.Data;
 using K12.Data;
 using K12.BusinessLogic;
 using FISCA.UDT;
+using CourseGradeB.EduAdminExtendControls;
 
 namespace NESHStudentReport
 {
@@ -15,9 +16,15 @@ namespace NESHStudentReport
 
         private static AccessHelper _A = new AccessHelper();
         public static Dictionary<string, List<string>> AbsenceSetDic = new Dictionary<string, List<string>>();
+        public static Dictionary<string, SubjectRecord> SubjectChineseNameRef = new Dictionary<string, SubjectRecord>();
 
         public static List<Student> GetGrade(string SchoolYear,List<string> StudentIDs,bool IsConvertScore)
         {
+            //假別設定初始化
+            AbsenceSetDicInit();
+            //科目參照初始化
+            SubjectRefInit();
+
             Dictionary<string, Student> Students = new Dictionary<string, Student>();
 
             try
@@ -142,6 +149,33 @@ namespace NESHStudentReport
                 if (AbsenceSetDic.ContainsKey(au.Target) && !AbsenceSetDic[au.Target].Contains(au.Source))
                     AbsenceSetDic[au.Target].Add(au.Source);
             }
+        }
+
+        /// <summary>
+        /// 初始化科目參照
+        /// </summary>
+        public static void SubjectRefInit()
+        {
+            SubjectChineseNameRef.Clear();
+
+            foreach (SubjectRecord subj in _A.Select<SubjectRecord>())
+            {
+                if (!SubjectChineseNameRef.ContainsKey(subj.Name))
+                    SubjectChineseNameRef.Add(subj.Name, subj);
+            }
+        }
+
+        /// <summary>
+        /// 取得科目中文名稱
+        /// </summary>
+        /// <param name="subj"></param>
+        /// <returns></returns>
+        public static string GetSubjectChineseName(string subj)
+        {
+            if (SubjectChineseNameRef.ContainsKey(subj))
+                return SubjectChineseNameRef[subj].ChineseName + " ";
+            else
+                return string.Empty;
         }
     }
 }
