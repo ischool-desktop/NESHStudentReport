@@ -92,6 +92,15 @@ namespace NESHStudentReport
                     else
                         Students = DataAccess.GetGrade(SelectedSchoolYear, SelectedStudentIDs, true);
 
+                    //列印排序
+                    Students.Sort(delegate(Student x, Student y)
+                    {
+                        string xx = x.ClassName.PadLeft(20, '0') + x.SeatNo.PadLeft(5, '0');
+                        string yy = y.ClassName.PadLeft(20, '0') + y.SeatNo.PadLeft(5, '0');
+
+                        return xx.CompareTo(yy);
+                    });
+
                     foreach (Student vStudent in Students)
                     {
                         template.Seek(0, SeekOrigin.Begin);
