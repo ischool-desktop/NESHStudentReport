@@ -65,14 +65,18 @@ namespace NESHStudentReport
 
                 string target = row.Cells[colTarget.Index].Value + "";
                 string source = row.Cells[colSource.Index].Value + "";
-                string key = target + "_" + source;
 
-                if (!auDic.ContainsKey(key))
+                if (!string.IsNullOrWhiteSpace(target) && !string.IsNullOrWhiteSpace(source))
                 {
-                    AbsenceUDT au = new AbsenceUDT();
-                    au.Target = target;
-                    au.Source = source;
-                    auDic.Add(key, au);
+                    string key = Utility.GetKey(target, source);
+
+                    if (!auDic.ContainsKey(key))
+                    {
+                        AbsenceUDT au = new AbsenceUDT();
+                        au.Target = target;
+                        au.Source = source;
+                        auDic.Add(key, au);
+                    }
                 }
             }
 
