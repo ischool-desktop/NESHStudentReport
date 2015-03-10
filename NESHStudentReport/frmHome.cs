@@ -76,6 +76,7 @@ namespace NESHStudentReport
             if (!string.IsNullOrEmpty(SelectedSchoolYear))
             {
                 this.btnPrint.Enabled = false;
+                this.link.Enabled = false;
 
                 Task<Document> task = Task<Document>.Factory.StartNew(() =>
                 {
@@ -121,6 +122,7 @@ namespace NESHStudentReport
                 task.ContinueWith((x) =>
                 {
                     this.btnPrint.Enabled = true;
+                    this.link.Enabled = true;
 
                     if (x.Exception != null)
                         MessageBox.Show(x.Exception.InnerException.Message);

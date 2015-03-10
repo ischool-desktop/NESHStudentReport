@@ -39,5 +39,10 @@ namespace NESHStudentReport
                 return mHelper;
             }
         }
+
+        public static string GetKey(params string[] s)
+        {
+            return string.Join("_", s);
+        }
     }
 }

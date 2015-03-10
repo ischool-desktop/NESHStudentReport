@@ -29,9 +29,11 @@ namespace NESHStudentReport
             colTarget.Items.Add("早午休遲到");
             colTarget.Items.Add("早午休曠課");
 
-            //取得全部假別
-            foreach (AbsenceMappingInfo info in AbsenceMapping.SelectAll())
-                colSource.Items.Add(info.Name);
+            foreach (string p in PeriodMapping.SelectAll().Select(x => x.Type).Distinct())
+            {
+                foreach (string a in AbsenceMapping.SelectAll().Select(x => x.Name))
+                    colSource.Items.Add(Utility.GetKey(p,a));
+            }
 
             //排序
             _auList = _A.Select<AbsenceUDT>();

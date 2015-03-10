@@ -258,17 +258,19 @@ namespace NESHStudentReport
             {
                 foreach (AbsenceCountRecord acr in vRecord.AbsenceCounts)
                 {
-                    if (DataAccess.AbsenceSetDic["事病假"].Contains(acr.Name))
+                    string key = Utility.GetKey(acr.PeriodType, acr.Name);
+
+                    if (DataAccess.AbsenceSetDic["事病假"].Contains(key))
                         FirstPerodsAbsentExcused += acr.Count;
-                    if (DataAccess.AbsenceSetDic["曠課"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["曠課"].Contains(key))
                         FirstPerodsAbsentUnexcused += acr.Count;
-                    if (DataAccess.AbsenceSetDic["遲到"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["遲到"].Contains(key))
                         FirstTimesTardy += acr.Count;
-                    if (DataAccess.AbsenceSetDic["升旗"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["升旗"].Contains(key))
                         FirstFlagCeremonyUnexcused += acr.Count;
-                    if (DataAccess.AbsenceSetDic["早午休遲到"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["早午休遲到"].Contains(key))
                         FirstQuietTimeTardy += acr.Count;
-                    if (DataAccess.AbsenceSetDic["早午休曠課"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["早午休曠課"].Contains(key))
                         FirstQuietTimeUnexcused += acr.Count;
                     //if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
                     //    FirstPerodsAbsentExcused += acr.Count;
@@ -288,17 +290,19 @@ namespace NESHStudentReport
             {
                 foreach (AbsenceCountRecord acr in vRecord.AbsenceCounts)
                 {
-                    if (DataAccess.AbsenceSetDic["事病假"].Contains(acr.Name))
+                    string key = Utility.GetKey(acr.PeriodType, acr.Name);
+
+                    if (DataAccess.AbsenceSetDic["事病假"].Contains(key))
                         SecondPerodsAbsentExcused += acr.Count;
-                    if (DataAccess.AbsenceSetDic["曠課"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["曠課"].Contains(key))
                         SecondPerodsAbsentUnexcused += acr.Count;
-                    if (DataAccess.AbsenceSetDic["遲到"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["遲到"].Contains(key))
                         SecondTimesTardy += acr.Count;
-                    if (DataAccess.AbsenceSetDic["升旗"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["升旗"].Contains(key))
                         SecondFlagCeremonyUnexcused += acr.Count;
-                    if (DataAccess.AbsenceSetDic["早午休遲到"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["早午休遲到"].Contains(key))
                         SecondQuietTimeTardy += acr.Count;
-                    if (DataAccess.AbsenceSetDic["早午休曠課"].Contains(acr.Name))
+                    if (DataAccess.AbsenceSetDic["早午休曠課"].Contains(key))
                         SecondQuietTimeUnexcused += acr.Count;
 
                     //if (acr.Name.Equals("事假") || acr.Name.Equals("病假"))
