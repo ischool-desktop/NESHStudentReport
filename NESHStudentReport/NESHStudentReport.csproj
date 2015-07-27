@@ -165,7 +165,25 @@
       <DependentUpon>SetForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="Library\Aspose.Cells_201402.dll" />
+    <Content Include="Library\Aspose.Words_201402.dll" />
+    <Content Include="Library\CourseGradeB.dll" />
+    <Content Include="Library\DevComponents.DotNetBar2.dll" />
+    <Content Include="Library\FISCA.Core.dll" />
+    <Content Include="Library\FISCA.Data.dll" />
+    <Content Include="Library\FISCA.dll" />
+    <Content Include="Library\FISCA.Permission.dll" />
+    <Content Include="Library\FISCA.Presentation.dll" />
+    <Content Include="Library\FISCA.UDT.dll" />
+    <Content Include="Library\Framework.dll" />
+    <Content Include="Library\IntelliSchool.DSA.ClientFramework.dll" />
+    <Content Include="Library\K12.BusinessLogic.dll" />
+    <Content Include="Library\K12.Data.dll" />
+    <Content Include="Library\K12.Presentation.dll" />
+    <Content Include="Library\SmartSchool.API.PlugIn.dll" />
+    <Content Include="Library\SmartSchool.Customization.PlugIn.dll" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\學生成績通知單%283-6%29.doc" />
     <None Include="Resources\學生成績通知單%287-8%29.doc" />

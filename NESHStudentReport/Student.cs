@@ -414,6 +414,12 @@ namespace NESHStudentReport
                     vSubject = new Subject();
                     vSubject.Name = Subject;
                     vSubject.Hour = Period;
+                    int hr;
+                    if (int.TryParse(Period, out hr))
+                        vSubject.OrderHour = hr;
+                    else
+                        vSubject.OrderHour = 0;
+
                     Subjects.Add(vSubject);
                 }
 

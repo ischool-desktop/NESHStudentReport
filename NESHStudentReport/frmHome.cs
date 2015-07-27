@@ -111,6 +111,9 @@ namespace NESHStudentReport
                         //Document dataDoc = new Document(new MemoryStream(template));
                         Document dataDoc = new Document(template);
 
+                        // 排序科目, 時數大->小,科目名稱A-Z
+                        List<Subject> sortSubjs = (from data in vStudent.Subjects orderby data.OrderHour descending, data.Name select data).ToList();
+                        vStudent.Subjects = sortSubjs;
                         mergeKeyValue = vStudent.OutputValue();
 
                         dataDoc.MailMerge.Execute(mergeKeyValue.Keys.ToArray(), mergeKeyValue.Values.ToArray());

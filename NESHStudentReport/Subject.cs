@@ -15,5 +15,11 @@ namespace NESHStudentReport
         public string FristGrade { get; set; }
 
         public string SecondGrade { get; set; }
+
+        /// <summary>
+        /// 時數排序用
+        /// </summary>
+        public int OrderHour { get; set; }
+
     }
 }
