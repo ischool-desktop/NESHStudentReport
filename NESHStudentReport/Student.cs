@@ -370,12 +370,39 @@ namespace NESHStudentReport
                 return Score;
         }
 
-        public void FillScore(DataRow row, bool IsConvertScore)
+        /// <summary>
+        /// 處理小數下幾位四捨五入
+        /// </summary>
+        /// <param name="Score"></param>
+        /// <param name="IsConvertScore"></param>
+        /// <returns></returns>
+        private string GetScore0(string Score, bool IsConvertScore,int num)
+        {
+            if (IsConvertScore)
+            {
+                decimal ss;
+                if (decimal.TryParse(Score, out ss))
+                    return System.Math.Round(ss, num, System.MidpointRounding.AwayFromZero).ToString();
+                else
+                    return Score;
+            }
+            else
+                return Score;
+        }
+
+        public void FillScore(DataRow row, bool IsConvertScore,string title)
         {
             //<SemesterSubjectScoreInfo>
             //    <Subject GPA=""0"" Level=""4"" 努力程度="""" 成績=""50"" 文字描述="""" 權數=""3"" 科目=""奇怪的科目"" 節數=""3"" 註記="""" 領域=""TEST""/>
             //    <Subject GPA=""4.5"" Level=""11"" 努力程度="""" 成績=""100"" 文字描述="""" 權數=""1"" 科目=""物理"" 節數=""1"" 註記="""" 領域=""""/>
             //</SemesterSubjectScoreInfo>"
+
+            // 檢查科目成績是否需要四捨五入至整數位
+            bool chkSubjScoreRound0 = false;
+
+            // 9-12年級才需要四捨五入至整數位
+            if (title.Contains("12"))
+                chkSubjScoreRound0 = true;
 
             string Semester = row.Field<string>("semester");
             string ScoreInfo = "<root>" + row.Field<string>("score_info") + "</root>";
@@ -403,9 +430,11 @@ namespace NESHStudentReport
                 string Subject = elmSubject.AttributeText("科目");
                 string Score = elmSubject.AttributeText("成績");
                 string Period = elmSubject.AttributeText("節數");
-                string Grade = Score;
+                string Grade = "";
 
-                Grade = GetScore(Score, IsConvertScore);
+                //Grade = GetScore(Score, IsConvertScore);
+                // 2015/8 討論調整四捨五入至整數位
+                Grade = GetScore0(Score, chkSubjScoreRound0,0);
 
                 Subject vSubject = Subjects.Find(x => x.Name.Equals(Subject));
 

@@ -18,7 +18,7 @@ namespace NESHStudentReport
         public static Dictionary<string, List<string>> AbsenceSetDic = new Dictionary<string, List<string>>();
         public static Dictionary<string, SubjectRecord> SubjectChineseNameRef = new Dictionary<string, SubjectRecord>();
 
-        public static List<Student> GetGrade(string SchoolYear,List<string> StudentIDs,bool IsConvertScore)
+        public static List<Student> GetGrade(string SchoolYear,List<string> StudentIDs,bool IsConvertScore,string title)
         {
             //假別設定初始化
             AbsenceSetDicInit();
@@ -60,7 +60,7 @@ namespace NESHStudentReport
                 {
                     string StudentID = row.Field<string>("ref_student_id");
 
-                    Students[StudentID].FillScore(row,IsConvertScore);
+                    Students[StudentID].FillScore(row,IsConvertScore,title);
                 }
                 #endregion
 

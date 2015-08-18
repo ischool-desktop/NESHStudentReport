@@ -89,9 +89,9 @@ namespace NESHStudentReport
                     List<Student> Students = new List<Student>();
                     
                     if (this.title.Contains("9"))
-                        Students = DataAccess.GetGrade(SelectedSchoolYear, SelectedStudentIDs, false);
+                        Students = DataAccess.GetGrade(SelectedSchoolYear, SelectedStudentIDs, false,title);
                     else
-                        Students = DataAccess.GetGrade(SelectedSchoolYear, SelectedStudentIDs, true);
+                        Students = DataAccess.GetGrade(SelectedSchoolYear, SelectedStudentIDs, true,title);
 
                     //列印排序
                     Students.Sort(delegate(Student x, Student y)
