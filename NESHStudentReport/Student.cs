@@ -376,18 +376,31 @@ namespace NESHStudentReport
         /// <param name="Score"></param>
         /// <param name="IsConvertScore"></param>
         /// <returns></returns>
-        private string GetScore0(string Score, bool IsConvertScore,int num)
+        private string GetScore0(string Score, bool IsConvertScore,int num,bool chkRound0)
         {
-            if (IsConvertScore)
-            {
                 decimal ss;
                 if (decimal.TryParse(Score, out ss))
-                    return System.Math.Round(ss, num, System.MidpointRounding.AwayFromZero).ToString();
+                {
+                    // 需要四捨五入
+                    if (chkRound0)
+                    {
+                        decimal sc = System.Math.Round(ss, num, System.MidpointRounding.AwayFromZero);
+                        if (IsConvertScore)
+                            return Tool.GPA.Eval(sc).Letter;
+                        else
+                            return sc.ToString();
+                    }
+                    else
+                    {
+                        if (IsConvertScore)
+                            return Tool.GPA.Eval(ss).Letter;
+                        else
+                            return ss.ToString();
+                    }
+                        
+                }                    
                 else
-                    return Score;
-            }
-            else
-                return Score;
+                    return Score;            
         }
 
         public void FillScore(DataRow row, bool IsConvertScore,string title)
@@ -434,7 +447,7 @@ namespace NESHStudentReport
 
                 //Grade = GetScore(Score, IsConvertScore);
                 // 2015/8 討論調整四捨五入至整數位
-                Grade = GetScore0(Score, chkSubjScoreRound0,0);
+                Grade = GetScore0(Score,IsConvertScore ,0,chkSubjScoreRound0);
 
                 Subject vSubject = Subjects.Find(x => x.Name.Equals(Subject));
 
